@@ -22,7 +22,7 @@ return [
     |
     | This value determines the "environment" your application is currently
     | running in. This may determine how you prefer to configure various
-    | services the application utilizes. Set this in your ".env" file.
+    | services your application utilizes. Set this in your ".env" file.
     |
     */
 
@@ -46,41 +46,67 @@ return [
     | Application URL
     |--------------------------------------------------------------------------
     |
-    | This URL is used by the console to properly generate URLs when using
-    | the Artisan command line tool. You should set this to the root of
-    | the application so that it's available within Artisan commands.
+    | This URL is used by the application in some situations, such as for
+    | authentication, or scheduling URLs. You should set this to the root
+    | of your application. By default, it assumes a server.
     |
     */
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'index' => env('APP_INDEX', 'index.php'),
+
+    'asset_url' => env('ASSET_URL'),
+
     /*
     |--------------------------------------------------------------------------
-    | Application Timezone
+    | Timezone
     |--------------------------------------------------------------------------
     |
     | Here you may specify the default timezone for your application, which
-    | will be used by the PHP date and date-time functions. The timezone
-    | is set to "UTC" by default as it is suitable for most use cases.
+    | will be used by the PHP date functions. We recommend setting this
+    | timezone is set to a timezone supported by PHP.
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
     |
-    | The application locale determines the default locale that will be used
-    | by Laravel's translation / localization methods. This option can be
-    | set to any locale for which you plan to have translation strings.
+    | The application locale determines the default locale of the application.
+    | The locale determines the availability of the language files that
+    | may be published to the application. You can easily get various
+    | language files from our application's packages.
     |
     */
 
     'locale' => env('APP_LOCALE', 'en'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Application Fallback Locale
+    |--------------------------------------------------------------------------
+    |
+    | The fallback locale determines the locale to use if the current locale
+    | is not available. You may change both of these values as needed.
+    |
+    */
+
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Faker Locale
+    |--------------------------------------------------------------------------
+    |
+    | This locale will be used by the Faker PHP library when generating fake
+    | data for your application's database. For example, this will be used
+    | when generating fake email addresses.
+    |
+    */
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
@@ -89,38 +115,67 @@ return [
     | Encryption Key
     |--------------------------------------------------------------------------
     |
-    | This key is utilized by Laravel's encryption services and should be set
-    | to a random, 32 character string to ensure that all encrypted values
-    | are secure. You should do this prior to deploying the application.
+    | Laravel encrypts messages using AES-256 encryption. You must change
+    | this key to a random, 32 character string for the encryption to work.
+    | Currently, Laravel does not support insecure random keys.
     |
     */
 
-    'cipher' => 'AES-256-CBC',
-
     'key' => env('APP_KEY'),
 
-    'previous_keys' => [
-        ...array_filter(
-            explode(',', (string) env('APP_PREVIOUS_KEYS', ''))
-        ),
-    ],
+    'cipher' => 'AES-256-CBC',
 
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
     |--------------------------------------------------------------------------
     |
-    | These configuration options determine the driver used to determine and
-    | manage Laravel's "maintenance mode" status. The "cache" driver will
-    | allow maintenance mode to be controlled across multiple machines.
-    |
-    | Supported drivers: "file", "cache"
+    | Here, you may determine how you willResuming from maintenance mode. The
+    | various maintained.
     |
     */
 
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
-        'store' => env('APP_MAINTENANCE_STORE', 'database'),
+        // 'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Polyfill Service Providers
+    |
+    | The providers listed here will be automatically applied to your
+    | application if your PHP version does not include the corresponding PHP
+    | extension.
+    |
+    */
+
+    'extra_service_providers' => [
+        // Laravel\Sail\SailServiceProvider::class, // Uncomment if you are using Sail
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | HTTP Cache
+    |--------------------------------------------------------------------------
+    |
+    | Expiration of every cache<bos>
+    |
+    */
+
+    'http_cache' => env('HTTP_CACHE', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Turn On The Lights
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the "do not disturb" status of your remote servers.
+    | If set to true, the core of the framework will be available to do your
+    | bidding. If it is false, no anonymous functions are executed.
+    |
+    */
+
+    'run_over_web_sockets' => env('APP_RUN_OVER_WEB_SOCKETS', false),
 
 ];
