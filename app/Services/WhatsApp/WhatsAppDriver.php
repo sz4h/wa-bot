@@ -20,6 +20,18 @@ abstract class WhatsAppDriver
     abstract public function sendDocument(string $to, string $documentUrl, ?string $filename = null, ?string $caption = null): array;
 
     /**
+     * Send a list message with sections and rows.
+     */
+    abstract public function sendList(
+        string $to,
+        string $title,
+        string $description,
+        string $buttonText,
+        array $sections,
+        ?string $footerText = null
+    ): array;
+
+    /**
      * Check if the connection/session is active.
      */
     abstract public function isConnected(): bool;
