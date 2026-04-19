@@ -32,6 +32,17 @@ abstract class WhatsAppDriver
     ): array;
 
     /**
+     * Send a location message.
+     */
+    abstract public function sendLocation(
+        string $to,
+        float $latitude,
+        float $longitude,
+        ?string $name = null,
+        ?string $address = null
+    ): array;
+
+    /**
      * Check if the connection/session is active.
      */
     abstract public function isConnected(): bool;
